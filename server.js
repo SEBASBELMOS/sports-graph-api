@@ -3,47 +3,53 @@ const cors = require('cors');
 const { dbNeo4j } = require('./database/Neo4jConnection');
 
 class Server {
+
     constructor() {
         this.app = express();
         this.port = process.env.PORT || 8080;
+
         this.pathsNeo4j = {
-            teams: '/api/teams',
-            athletes: '/api/athletes',
-            contracts: '/api/contracts',
-            consultations: '/api/consultations'
+            equipos: '/api/equipos',
+            deportistas: '/api/deportistas',
+            contrataciones: '/api/contrataciones',
+            consultas: '/api/consultas'  // Asegúrate de incluir 'consultas' aquí
         };
-        // Connect to databases
+
+        // Conectar a las bases de datos
         this.dbConnectionNeo4j();
+
         // Middlewares
         this.middlewares();
-        // Routes
+
+        // Rutas
         this.routes();
     }
 
-    // Neo4j connection
+    // Conexión a Neo4j
     async dbConnectionNeo4j() {
         await dbNeo4j();
     }
 
-    // Load middlewares
+    // Cargar middlewares
     middlewares() {
         this.app.use(cors());
         this.app.use(express.json());
     }
 
-    // Define routes
+    // Definir rutas
     routes() {
-        // Neo4j routes
-        this.app.use(this.pathsNeo4j.teams, require('./routes/teams'));
-        this.app.use(this.pathsNeo4j.athletes, require('./routes/athletes'));
-        this.app.use(this.pathsNeo4j.contracts, require('./routes/contracts'));
-        this.app.use(this.pathsNeo4j.consultations, require('./routes/consultations'));
+
+        // Rutas Neo4j
+        this.app.use(this.pathsNeo4j.equipos, require('./routes/equipos'));
+        this.app.use(this.pathsNeo4j.deportistas, require('./routes/deportistas'));
+        this.app.use(this.pathsNeo4j.contrataciones, require('./routes/contrataciones'));
+        this.app.use(this.pathsNeo4j.consultas, require('./routes/consultas')); // Cambiado 'this.paths' por 'this.pathsNeo4j'
     }
 
-    // Start server
+    // Iniciar servidor
     listen() {
         this.app.listen(this.port, () => {
-            console.log('Server running on port', this.port);
+            console.log('Servidor corriendo en puerto', this.port);
         });
     }
 }
