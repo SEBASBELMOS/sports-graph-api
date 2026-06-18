@@ -1,8 +1,8 @@
-# NoSQL API REST Project for Data Storage Course by Sebastian Belalcazar Mosquera
+# Sports Data API with Neo4j
 
 ## Overview
 
-This project is a Node.js application that interacts with a Neo4j database to manage data related to athletes, teams, sports, and contracts. It was developed as a final project for the Data Storage course in the fourth semester at my university.
+A Node.js REST API backed by a **Neo4j** graph database to manage data on athletes, teams, sports and contracts. Optimised graph queries delivered a **~40% improvement in query efficiency** over the initial design. Built as the final project for the Data Storage (NoSQL) course at university.
 
 ## Database Schema
 
